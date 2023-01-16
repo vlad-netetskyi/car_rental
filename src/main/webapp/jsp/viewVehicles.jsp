@@ -5,6 +5,7 @@
 
 <html>
     <body>
+        <jsp:include page="parts/header.jsp"/>
         <table>
             <%
             List vehicles = (List) request.getAttribute("vehicles");

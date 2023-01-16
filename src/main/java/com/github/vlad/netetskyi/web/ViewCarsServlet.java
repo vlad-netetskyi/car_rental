@@ -11,10 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(
-        name = "ViewCars",
-        urlPatterns = {"/cars"}
-)
+@WebServlet(name = "ViewCars", urlPatterns = {"/"})
 public class ViewCarsServlet extends HttpServlet {
 
     private final VehicleRepository vehicleRepository;
