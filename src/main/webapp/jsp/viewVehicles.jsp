@@ -6,14 +6,12 @@
 <html>
     <body>
         <table>
-            <th>brand</th>
-            <th>model</th>
-            <th></th>
             <%
             List vehicles = (List) request.getAttribute("vehicles");
             for(int i=0; i<vehicles.size();i++){
                 Vehicle vehicle = (Vehicle) vehicles.get(i);%>
                 <tr>
+                    <td><img alt="img" style="max-width:250px;width:100%" src="data:image/jpeg;base64,<%= vehicle.getBase64ImgFile() %>"/></td>
                     <td><%= vehicle.getBrand() %></td>
                     <td><%= vehicle.getModel() %></td>
                     <td>Book!</td>

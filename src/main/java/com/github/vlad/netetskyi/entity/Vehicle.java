@@ -1,14 +1,21 @@
 package com.github.vlad.netetskyi.entity;
 
+import org.apache.tomcat.util.codec.binary.Base64;
+
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 public class Vehicle {
     private final String brand;
     private final String model;
 
-    public Vehicle(String brand, String model) {
+    private final byte[] img;
+
+    public Vehicle(String brand, String model, byte[] img) {
         this.brand = brand;
         this.model = model;
+        this.img = img;
     }
 
     public String getBrand() {
@@ -17,6 +24,12 @@ public class Vehicle {
 
     public String getModel() {
         return model;
+    }
+
+    public String getBase64ImgFile() throws UnsupportedEncodingException {
+        // TODO: find better place for it
+        byte[] encodeBase64 = Base64.encodeBase64(img, false);
+        return new String(encodeBase64, StandardCharsets.UTF_8);
     }
 
     @Override
