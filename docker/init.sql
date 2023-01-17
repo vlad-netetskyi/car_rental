@@ -7,5 +7,12 @@ CREATE TABLE IF NOT EXISTS car_rental_sh.users (
     first_name VARCHAR(50),
     last_name VARCHAR(50)
 );
-INSERT INTO car_rental_sh.users(username, password, role, first_name, last_name)
-    VALUES("admin", sha512("admin"), "ADMIN", "admin", "admin");
+CREATE TABLE IF NOT EXISTS car_rental_sh.vehicles (
+    vehicle_id serial PRIMARY KEY,
+    brand VARCHAR(50) NOT NULL,
+    model VARCHAR(50) NOT NULL,
+    type VARCHAR(20) NOT NULL,
+    production_year INT NOT NULL,
+    price NUMERIC NOT NULL,
+    img BYTEA NOT NULL
+);

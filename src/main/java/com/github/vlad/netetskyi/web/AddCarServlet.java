@@ -46,7 +46,10 @@ public class AddCarServlet extends HttpServlet {
 
         String brand = req.getParameter("brand");
         String model = req.getParameter("model");
-        Vehicle vehicle = new Vehicle(brand, model, fileAsByteArray);
+        String type = req.getParameter("type");
+        int year = Integer.parseInt(req.getParameter("year"));
+        double price = Double.parseDouble(req.getParameter("price"));
+        Vehicle vehicle = new Vehicle(null, brand, model, type, year, price, fileAsByteArray);
         vehicleRepository.add(vehicle);
         resp.sendRedirect(req.getContextPath() + "/");
     }

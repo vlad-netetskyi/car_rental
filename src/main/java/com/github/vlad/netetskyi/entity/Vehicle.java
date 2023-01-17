@@ -7,15 +7,26 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 public class Vehicle {
+    private final Long id;
     private final String brand;
     private final String model;
-
+    private final String type;
+    private final int year;
+    private final double price;
     private final byte[] img;
 
-    public Vehicle(String brand, String model, byte[] img) {
+    public Vehicle(Long id, String brand, String model, String type, int year, double price, byte[] img) {
+        this.id = id;
         this.brand = brand;
         this.model = model;
+        this.type = type;
+        this.year = year;
+        this.price = price;
         this.img = img;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getBrand() {
@@ -24,6 +35,22 @@ public class Vehicle {
 
     public String getModel() {
         return model;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public byte[] getImg() {
+        return img;
     }
 
     public String getBase64ImgFile() throws UnsupportedEncodingException {
@@ -37,19 +64,23 @@ public class Vehicle {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Vehicle vehicle = (Vehicle) o;
-        return Objects.equals(brand, vehicle.brand) && Objects.equals(model, vehicle.model);
+        return year == vehicle.year && Double.compare(vehicle.price, price) == 0 && Objects.equals(id, vehicle.id) && Objects.equals(brand, vehicle.brand) && Objects.equals(model, vehicle.model) && Objects.equals(type, vehicle.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(brand, model);
+        return Objects.hash(id, brand, model, type, year, price);
     }
 
     @Override
     public String toString() {
         return "Vehicle{" +
-                "brand='" + brand + '\'' +
+                "id=" + id +
+                ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
+                ", type='" + type + '\'' +
+                ", year=" + year +
+                ", price=" + price +
                 '}';
     }
 }

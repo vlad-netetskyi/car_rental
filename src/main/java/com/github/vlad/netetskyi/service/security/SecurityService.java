@@ -15,6 +15,11 @@ public class SecurityService {
     public static SecurityService getInstance() {
         if (instance == null) {
             instance = new SecurityService();
+            try {
+                instance.addUser("admin", "admin", Role.ADMIN, "admin", "admin");
+            } catch (Throwable t) {
+                // NOP
+            }
         }
 
         return instance;
