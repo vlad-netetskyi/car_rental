@@ -3,13 +3,15 @@ package com.github.vlad.netetskyi.service.security;
 import java.util.Objects;
 
 public class User {
+    private final Long id;
     private final String name;
     private final String password;
     private final Role role;
     private final String firstName;
     private final String lastName;
 
-    public User(String name, String password, Role role, String firstName, String lastName) {
+    public User(Long id, String name, String password, Role role, String firstName, String lastName) {
+        this.id = id;
         this.name = name;
         this.password = password;
         this.role = role;
@@ -46,19 +48,19 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(name, user.name) && Objects.equals(password, user.password) && role == user.role && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(password, user.password) && role == user.role && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, password, role, firstName, lastName);
+        return Objects.hash(id, name, password, role, firstName, lastName);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
-                ", password='" + password + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", role=" + role +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

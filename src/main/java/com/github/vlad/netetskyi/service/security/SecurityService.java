@@ -1,41 +1,71 @@
 package com.github.vlad.netetskyi.service.security;
 
-import java.util.Map;
+import com.github.vlad.netetskyi.repository.UserRepository;
+
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class SecurityService {
-    private Map<String, User> users;
+    private UserRepository userRepository;
 
     private static SecurityService instance = null;
 
     public static SecurityService getInstance() {
         if (instance == null) {
             instance = new SecurityService();
-            instance.addUser("admin", "admin", Role.ADMIN, "admin", "admin"); // TODO: remove it later
         }
 
         return instance;
     }
 
     public SecurityService() {
-        this.users = new ConcurrentHashMap<>();
+        this.userRepository = new UserRepository();
     }
 
-    public boolean addUser(String userName, String password, Role role, String firstName, String lastName) {
-        // TODO: hash passwords!
-        final User newUser = new User(userName, password, role, firstName, lastName);
-        final User prev = users.putIfAbsent(userName, newUser);
-        return !newUser.equals(prev);
+    public void addUser(String userName, String password, Role role, String firstName, String lastName) {
+        final User newUser = new User(null, userName, hash(password), role, firstName, lastName);
+        userRepository.save(newUser);
     }
 
     public User checkPasswordAndGet(String userName, String password) {
-        // TODO: hash passwords!
-        final User user = users.get(userName);
-        if (Objects.equals(password, user.getPassword())) {
+        final User user = userRepository.getByName(userName);
+        if (user != null && Objects.equals(hash(password), user.getPassword())) {
             return user;
         } else {
             return null;
+        }
+    }
+
+    public static String hash(String input) {
+        try {
+            // getInstance() method is called with algorithm SHA-512
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+
+            // digest() method is called
+            // to calculate message digest of the input string
+            // returned as array of byte
+            byte[] messageDigest = md.digest(input.getBytes());
+
+            // Convert byte array into signum representation
+            BigInteger no = new BigInteger(1, messageDigest);
+
+            // Convert message digest into hex value
+            String hashtext = no.toString(16);
+
+            // Add preceding 0s to make it 32 bit
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+
+            // return the HashText
+            return hashtext;
+        }
+
+        // For specifying wrong message digest algorithms
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
     }
 }

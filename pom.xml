@@ -52,6 +52,11 @@
             <artifactId>commons-io</artifactId>
             <version>${apache.commons.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.5.1</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>car_rental</finalName>
