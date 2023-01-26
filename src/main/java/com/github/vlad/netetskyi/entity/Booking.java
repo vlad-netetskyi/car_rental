@@ -19,6 +19,10 @@ public class Booking {
     private String vehicleBrand;
     private String vehicleModel;
 
+    public static final String PENDING = "Обробляється";
+    public static final String ACCEPTED = "Підтверджено";
+    public static final String REJECTED = "Відхилено";
+
     public Booking(Long id, long userId, long vehicleId, Instant createdAt, Instant rentStartDate, Instant rentFinishDate, double rentTotalPrice, String status, Instant statusChangedAt) {
         this.id = id;
         this.userId = userId;
@@ -90,6 +94,14 @@ public class Booking {
 
     public void setVehicleModel(String vehicleModel) {
         this.vehicleModel = vehicleModel;
+    }
+
+    public boolean canBeAccepted() {
+        return !Objects.equals(status, ACCEPTED);
+    }
+
+    public boolean canBeRejected() {
+        return !Objects.equals(status, REJECTED);
     }
 
     @Override

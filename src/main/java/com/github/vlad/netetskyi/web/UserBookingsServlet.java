@@ -30,10 +30,16 @@ public class UserBookingsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = ((User) req.getSession().getAttribute("user"));
         if (user != null) {
-            List<Booking> all = bookingRepository.getAllByUserId(user.getId());
-            List<Long> vehicleIds = all.stream().map(Booking::getVehicleId).toList();
+            List<Booking> bookings;
+            if (user.isAdmin()) {
+                bookings = bookingRepository.getAll();
+            } else {
+                bookings = bookingRepository.getAllByUserId(user.getId());
+            }
+
+            List<Long> vehicleIds = bookings.stream().map(Booking::getVehicleId).toList();
             List<Vehicle> vehicles = vehicleRepository.getByIds(vehicleIds);
-            for (Booking booking : all) {
+            for (Booking booking : bookings) {
                 long vehicleId = booking.getVehicleId();
                 vehicles.stream().filter(v -> Objects.equals(v.getId(), vehicleId)).findAny().ifPresent(vehicle -> {
                     booking.setVehicleBrand(vehicle.getBrand());
@@ -41,7 +47,7 @@ public class UserBookingsServlet extends HttpServlet {
                 });
             }
 
-            req.setAttribute("bookings", all);
+            req.setAttribute("bookings", bookings);
             req.getRequestDispatcher("/jsp/viewBookings.jsp").forward(req, resp);
         } else {
             resp.sendRedirect(req.getContextPath() + "/");

@@ -32,7 +32,7 @@ public class BookCarServlet extends HttpServlet {
         Instant toDate = parse(req.getParameter("toDate"));
 
         // create pending order
-        Booking booking = new Booking(null, userId, vehicleId, Instant.now(), fromDate, toDate, 100.0, "PENDING", Instant.now());
+        Booking booking = new Booking(null, userId, vehicleId, Instant.now(), fromDate, toDate, 100.0, Booking.PENDING, Instant.now());
         System.out.println("Adding new pending order:\n " + booking);
         bookingRepository.save(booking);
         // forward to thank you page with order id

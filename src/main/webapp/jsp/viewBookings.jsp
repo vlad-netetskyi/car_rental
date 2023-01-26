@@ -20,6 +20,9 @@
                         <th>Час оренди</th>
                         <th>Ціна</th>
                         <th>Статус</th>
+                        <% if(user.isAdmin()) { %>
+                            <th>Управління бронюванням</th>
+                        <% } %>
 
                         <%for(int i=0; i<bookings.size();i++){
                             Booking booking = (Booking) bookings.get(i);%>
@@ -30,6 +33,16 @@
                                 <td><%= booking.getRentDurationStr() %></td>
                                 <td><%= booking.getRentTotalPrice() %> грн</td>
                                 <td><%= booking.getStatus() %></td>
+                                <% if(user.isAdmin()) { %>
+                                    <td>
+                                        <% if(booking.canBeAccepted()) { %>
+                                            <a href="/updateBooking?id=<%=booking.getId()%>&status=<%=Booking.ACCEPTED%>">Підтвердити</a>
+                                        <% } %>
+                                        <% if(booking.canBeRejected()) { %>
+                                            <a href="/updateBooking?id=<%=booking.getId()%>&status=<%=Booking.REJECTED%>">Відхилити</a>
+                                        <% } %>
+                                    </td>
+                                <% } %>
                             </tr>
                         <%}%>
                     </table>
