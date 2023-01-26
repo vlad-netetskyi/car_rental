@@ -8,11 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 public class BookingRepository {
 
     final Map<Long, Booking> orders = new ConcurrentHashMap<>();
+    private static AtomicLong ID = new AtomicLong(0);
 
     private static BookingRepository INSTANCE = null;
 
@@ -25,7 +27,7 @@ public class BookingRepository {
     }
 
     public void save(Booking booking) {
-        Booking withId = booking.withId(System.currentTimeMillis());
+        Booking withId = booking.withId(ID.incrementAndGet());
         orders.put(withId.getId(), withId);
     }
 
