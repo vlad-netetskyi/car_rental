@@ -1,6 +1,8 @@
 package com.github.vlad.netetskyi.entity;
 
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Booking {
@@ -62,6 +64,15 @@ public class Booking {
         return statusChangedAt;
     }
 
+    public String getCreatedAtStr() {
+        return friendlyDate(createdAt, "HH:mm:ss dd.MM.yyyy");
+    }
+
+    public String getRentDurationStr() {
+        final String pattern = "dd.MM.yyyy";
+        return friendlyDate(rentStartDate, pattern) + " - " + friendlyDate(rentFinishDate, pattern);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -92,5 +103,10 @@ public class Booking {
 
     public Booking withId(Long id) {
         return new Booking(id, userId, vehicleId, createdAt, rentStartDate, rentFinishDate, rentTotalPrice, status, statusChangedAt);
+    }
+
+    public static String friendlyDate(Instant instant, String pattern) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern).withZone(ZoneId.systemDefault());
+        return formatter.format(instant);
     }
 }

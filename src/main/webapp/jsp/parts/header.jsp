@@ -5,6 +5,9 @@
 
 <header>
 <a href="/">Парк авто </a>
+<%if(user != null) {%>
+    <a href="/bookings">Бронювання</a>
+<% } %>
 <a>Умови та гарантії </a>
 <a>Контакти</a>
 <%if(user != null) {%>

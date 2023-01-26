@@ -5,7 +5,7 @@
         <jsp:include page="parts/header.jsp"/>
         <div>
             <p>Ура! Ви успішно створити бронювання на нашому сайті.</p>
-            <p><a href="/">на головну</></p>
+            <p><a href="/bookings">мої бронювання</> <a href="/">головна</></p>
         </div>
     </body>
 </html>
