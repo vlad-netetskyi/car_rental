@@ -37,10 +37,12 @@ public class ViewCarsServlet extends HttpServlet {
         System.out.println("FromDate = " + fromDate + ", ToDate = " + toDate);
         List<Vehicle> all = vehicleRepository.getAll();
         req.setAttribute("vehicles", all);
+        req.setAttribute("fromDate", req.getParameter("fromDate"));
+        req.setAttribute("toDate", req.getParameter("toDate"));
         req.getRequestDispatcher("/jsp/viewVehicles.jsp").forward(req, resp);
     }
 
-    private Instant parse(String dateStr) {
+    public static Instant parse(String dateStr) {
         LocalDate date = LocalDate.parse(dateStr);
         return date.atStartOfDay(ZoneId.of("Europe/Paris")).toInstant();
     }

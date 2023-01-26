@@ -16,3 +16,16 @@ CREATE TABLE IF NOT EXISTS car_rental_sh.vehicles (
     price NUMERIC NOT NULL,
     img BYTEA NOT NULL
 );
+CREATE TABLE IF NOT EXISTS car_rental_sh.orders (
+    id serial PRIMARY KEY,
+    vehicle_id INT NOT NULL,
+    user_id INT NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    rent_start_date TIMESTAMP NOT NULL,
+    rent_finish_date TIMESTAMP NOT NULL,
+    rent_total_price NUMERIC NOT NULL
+    status VARCHAR(30) NOT NULL,
+    status_changed_at TIMESTAMP,
+    FOREIGN KEY (vehicle_id) REFERENCES car_rental_sh.vehicles(vehicle_id),
+    FOREIGN KEY (user_id) REFERENCES car_rental_sh.users(user_id)
+);
