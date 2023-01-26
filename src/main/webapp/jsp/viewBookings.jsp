@@ -16,6 +16,7 @@
                     <table>
                         <th>Номер бронювання</th>
                         <th>Час бронювання</th>
+                        <th>Авто</th>
                         <th>Час оренди</th>
                         <th>Ціна</th>
                         <th>Статус</th>
@@ -25,6 +26,7 @@
                             <tr>
                                 <td><%= booking.getId() %></td>
                                 <td><%= booking.getCreatedAtStr() %></td>
+                                <td><%= booking.getVehicleBrand()%> <%= booking.getVehicleModel()%></td>
                                 <td><%= booking.getRentDurationStr() %></td>
                                 <td><%= booking.getRentTotalPrice() %> грн</td>
                                 <td><%= booking.getStatus() %></td>

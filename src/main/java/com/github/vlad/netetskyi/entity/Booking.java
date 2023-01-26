@@ -16,6 +16,9 @@ public class Booking {
     private final String status;
     private final Instant statusChangedAt;
 
+    private String vehicleBrand;
+    private String vehicleModel;
+
     public Booking(Long id, long userId, long vehicleId, Instant createdAt, Instant rentStartDate, Instant rentFinishDate, double rentTotalPrice, String status, Instant statusChangedAt) {
         this.id = id;
         this.userId = userId;
@@ -65,12 +68,28 @@ public class Booking {
     }
 
     public String getCreatedAtStr() {
-        return friendlyDate(createdAt, "HH:mm:ss dd.MM.yyyy");
+        return friendlyDate(createdAt, "dd.MM.yyyy HH:mm:ss");
     }
 
     public String getRentDurationStr() {
         final String pattern = "dd.MM.yyyy";
         return friendlyDate(rentStartDate, pattern) + " - " + friendlyDate(rentFinishDate, pattern);
+    }
+
+    public String getVehicleBrand() {
+        return vehicleBrand;
+    }
+
+    public String getVehicleModel() {
+        return vehicleModel;
+    }
+
+    public void setVehicleBrand(String vehicleBrand) {
+        this.vehicleBrand = vehicleBrand;
+    }
+
+    public void setVehicleModel(String vehicleModel) {
+        this.vehicleModel = vehicleModel;
     }
 
     @Override

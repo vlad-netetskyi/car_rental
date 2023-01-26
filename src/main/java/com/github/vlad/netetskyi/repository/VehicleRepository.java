@@ -3,12 +3,10 @@ package com.github.vlad.netetskyi.repository;
 import com.github.vlad.netetskyi.entity.Vehicle;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VehicleRepository {
 
@@ -50,15 +48,7 @@ public class VehicleRepository {
         try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             ResultSet resultSet = pstmt.executeQuery();
             if (resultSet.next()) {
-                Vehicle vehicle = new Vehicle(
-                        resultSet.getLong("vehicle_id"),
-                        resultSet.getString("brand"),
-                        resultSet.getString("model"),
-                        resultSet.getString("type"),
-                        resultSet.getInt("production_year"),
-                        resultSet.getDouble("price"),
-                        resultSet.getBytes("img"));
-                vehicles.add(vehicle);
+                vehicles.add(map(resultSet));
             }
 
         } catch (Exception e) {
@@ -66,5 +56,43 @@ public class VehicleRepository {
         }
 
         return vehicles;
+    }
+
+    public List<Vehicle> getByIds(List<Long> ids) {
+        if (ids == null || ids.isEmpty()) {
+            return List.of();
+        }
+
+        var sql = String.format("SELECT * FROM car_rental_sh.vehicles WHERE vehicle_id IN (%s)",
+                ids.stream()
+                        .map(v -> "?")
+                        .collect(Collectors.joining(", ")));
+        final List<Vehicle> vehicles = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            int index = 1;
+            for (Long id : ids) {
+                pstmt.setLong(index++, id);
+            }
+            ResultSet resultSet = pstmt.executeQuery();
+            if (resultSet.next()) {
+                vehicles.add(map(resultSet));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return vehicles;
+    }
+
+    private Vehicle map(ResultSet resultSet) throws SQLException {
+        return new Vehicle(
+                resultSet.getLong("vehicle_id"),
+                resultSet.getString("brand"),
+                resultSet.getString("model"),
+                resultSet.getString("type"),
+                resultSet.getInt("production_year"),
+                resultSet.getDouble("price"),
+                resultSet.getBytes("img"));
     }
 }
