@@ -44,8 +44,41 @@ public class VehicleRepository {
 
     public List<Vehicle> getAll() {
         final String sql = "SELECT * FROM car_rental_sh.vehicles LIMIT 100";
+
         final List<Vehicle> vehicles = new ArrayList<>();
         try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet resultSet = pstmt.executeQuery();
+            if (resultSet.next()) {
+                vehicles.add(map(resultSet));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return vehicles;
+    }
+
+    public List<Vehicle> getAllWithFilters(List<Long> idsToExclude) {
+        String sql = "SELECT * FROM car_rental_sh.vehicles";
+
+        if (idsToExclude != null && !idsToExclude.isEmpty()) {
+            sql += String.format(" WHERE vehicle_id NOT IN (%s)",
+                    idsToExclude.stream()
+                            .map(v -> "?")
+                            .collect(Collectors.joining(", ")));
+        }
+
+        final List<Vehicle> vehicles = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            int index = 1;
+
+            if (idsToExclude != null && !idsToExclude.isEmpty()) {
+                for (Long id : idsToExclude) {
+                    pstmt.setLong(index++, id);
+                }
+            }
+
             ResultSet resultSet = pstmt.executeQuery();
             if (resultSet.next()) {
                 vehicles.add(map(resultSet));

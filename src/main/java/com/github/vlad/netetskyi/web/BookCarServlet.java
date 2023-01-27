@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 
 import static com.github.vlad.netetskyi.web.ViewCarsServlet.parse;
 
@@ -28,8 +29,8 @@ public class BookCarServlet extends HttpServlet {
         // extract ids
         long userId = Long.parseLong(req.getParameter("userId"));
         long vehicleId = Long.parseLong(req.getParameter("vehicleId"));
-        Instant fromDate = parse(req.getParameter("fromDate"));
-        Instant toDate = parse(req.getParameter("toDate"));
+        Instant fromDate = parse(req.getParameter("fromDate")).truncatedTo(ChronoUnit.DAYS);
+        Instant toDate = parse(req.getParameter("toDate")).truncatedTo(ChronoUnit.DAYS).plus(1, ChronoUnit.DAYS).minus(1, ChronoUnit.MINUTES);
 
         // create pending order
         Booking booking = new Booking(null, userId, vehicleId, Instant.now(), fromDate, toDate, 100.0, Booking.PENDING, Instant.now());

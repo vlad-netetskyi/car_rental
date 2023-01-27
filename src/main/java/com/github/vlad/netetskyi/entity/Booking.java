@@ -97,11 +97,11 @@ public class Booking {
     }
 
     public boolean canBeAccepted() {
-        return !Objects.equals(status, ACCEPTED);
+        return !Objects.equals(status, PENDING);
     }
 
     public boolean canBeRejected() {
-        return !Objects.equals(status, REJECTED);
+        return Objects.equals(status, PENDING);
     }
 
     @Override
