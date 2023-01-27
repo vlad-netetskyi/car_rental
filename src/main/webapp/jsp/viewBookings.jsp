@@ -21,6 +21,8 @@
                         <th>Ціна</th>
                         <th>Статус</th>
                         <% if(user.isAdmin()) { %>
+                            <th>Замовник</th>
+                            <th>Телефон</th>
                             <th>Управління бронюванням</th>
                         <% } %>
 
@@ -34,6 +36,8 @@
                                 <td><%= booking.getRentTotalPrice() %> грн</td>
                                 <td><%= booking.getStatus() %></td>
                                 <% if(user.isAdmin()) { %>
+                                    <td><%= booking.getUserFullName()%></td>
+                                    <td><%= booking.getUserPhone()%></td>
                                     <td>
                                         <% if(booking.canBeAccepted()) { %>
                                             <a href="/updateBooking?id=<%=booking.getId()%>&status=<%=Booking.ACCEPTED%>">Підтвердити</a>

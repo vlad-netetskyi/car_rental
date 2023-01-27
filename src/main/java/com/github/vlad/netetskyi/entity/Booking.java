@@ -19,6 +19,9 @@ public class Booking {
     private String vehicleBrand;
     private String vehicleModel;
 
+    private String userFullName;
+    private String userPhone;
+
     public static final String PENDING = "Обробляється";
     public static final String ACCEPTED = "Підтверджено";
     public static final String REJECTED = "Відхилено";
@@ -97,11 +100,27 @@ public class Booking {
     }
 
     public boolean canBeAccepted() {
-        return !Objects.equals(status, PENDING);
+        return Objects.equals(status, PENDING);
     }
 
     public boolean canBeRejected() {
         return Objects.equals(status, PENDING);
+    }
+
+    public void setUserFullName(String userFullName) {
+        this.userFullName = userFullName;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
+    public String getUserFullName() {
+        return userFullName;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
     }
 
     @Override

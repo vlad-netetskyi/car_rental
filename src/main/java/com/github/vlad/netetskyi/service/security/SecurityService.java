@@ -26,7 +26,7 @@ public class SecurityService {
     }
 
     public SecurityService() {
-        this.userRepository = new UserRepository();
+        this.userRepository = UserRepository.getInstance();
     }
 
     public void addUser(String userName, String password, Role role, String firstName, String lastName, String phoneNumber) {

@@ -3,6 +3,7 @@ package com.github.vlad.netetskyi.web;
 import com.github.vlad.netetskyi.entity.Booking;
 import com.github.vlad.netetskyi.entity.Vehicle;
 import com.github.vlad.netetskyi.repository.BookingRepository;
+import com.github.vlad.netetskyi.repository.UserRepository;
 import com.github.vlad.netetskyi.repository.VehicleRepository;
 import com.github.vlad.netetskyi.service.security.User;
 import jakarta.servlet.ServletException;
@@ -20,10 +21,12 @@ public class UserBookingsServlet extends HttpServlet {
 
     private final BookingRepository bookingRepository;
     private final VehicleRepository vehicleRepository;
+    private final UserRepository userRepository;
 
     public UserBookingsServlet() {
         this.bookingRepository = BookingRepository.getInstance();
         this.vehicleRepository = VehicleRepository.getInstance();
+        this.userRepository = UserRepository.getInstance();
     }
 
     @Override
@@ -38,12 +41,20 @@ public class UserBookingsServlet extends HttpServlet {
             }
 
             List<Long> vehicleIds = bookings.stream().map(Booking::getVehicleId).toList();
+            List<Long> userIds = bookings.stream().map(Booking::getUserId).toList();
             List<Vehicle> vehicles = vehicleRepository.getByIds(vehicleIds);
+            List<User> users = userRepository.getByIds(userIds);
             for (Booking booking : bookings) {
                 long vehicleId = booking.getVehicleId();
                 vehicles.stream().filter(v -> Objects.equals(v.getId(), vehicleId)).findAny().ifPresent(vehicle -> {
                     booking.setVehicleBrand(vehicle.getBrand());
                     booking.setVehicleModel(vehicle.getModel());
+                });
+
+                long userId = booking.getUserId();
+                users.stream().filter(v -> Objects.equals(v.getId(), userId)).findAny().ifPresent(aUser -> {
+                    booking.setUserFullName(aUser.getFirstName() + " " + aUser.getLastName());
+                    booking.setUserPhone(aUser.getPhoneNumber());
                 });
             }
 
