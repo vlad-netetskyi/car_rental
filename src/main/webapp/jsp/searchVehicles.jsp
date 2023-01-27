@@ -9,10 +9,10 @@
             <form action = "/" method = "POST">
                 <div class="container">
                     <label for="fromDate">з</label>
-                    <input type="date" name = "fromDate" required>
+                    <input type="date" name = "fromDate" value = "<%=request.getAttribute("defaultFromDate")%>" required>
 
                     <label for="toDate">по</label>
-                    <input type="date" name = "toDate" required> <br/>
+                    <input type="date" name = "toDate" value = "<%=request.getAttribute("defaultToDate")%>" required> <br/>
 
                     <input type = "submit" value = "Пошук"/>
                 </div>

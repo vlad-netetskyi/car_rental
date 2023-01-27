@@ -1,5 +1,6 @@
 package com.github.vlad.netetskyi.web;
 
+import com.github.vlad.netetskyi.entity.Booking;
 import com.github.vlad.netetskyi.entity.Vehicle;
 import com.github.vlad.netetskyi.repository.VehicleRepository;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @WebServlet(name = "ViewCars", urlPatterns = {"/"})
@@ -26,6 +28,9 @@ public class ViewCarsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("/cars GET");
+        final String pattern = "YYYY-MM-DD";
+        req.setAttribute("defaultFromDate", Booking.friendlyDate(Instant.now(), pattern));
+        req.setAttribute("defaultToDate", Booking.friendlyDate(Instant.now().plus(1, ChronoUnit.DAYS), pattern));
         req.getRequestDispatcher("/jsp/searchVehicles.jsp").forward(req, resp);
     }
 
