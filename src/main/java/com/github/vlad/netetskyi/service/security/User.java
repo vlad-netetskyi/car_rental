@@ -9,14 +9,16 @@ public class User {
     private final Role role;
     private final String firstName;
     private final String lastName;
+    private final String phoneNumber;
 
-    public User(Long id, String name, String password, Role role, String firstName, String lastName) {
+    public User(Long id, String name, String password, Role role, String firstName, String lastName, String phoneNumber) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
     }
 
     public Long getId() {
@@ -47,6 +49,10 @@ public class User {
         return Role.ADMIN.equals(this.role);
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,6 +74,7 @@ public class User {
                 ", role=" + role +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
 }

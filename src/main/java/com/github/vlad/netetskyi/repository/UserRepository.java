@@ -18,13 +18,14 @@ public class UserRepository {
     }
 
     public void save(User user) {
-        final String sql = "INSERT INTO car_rental_sh.users(username, password, role, first_name, last_name) VALUES(?,?,?,?,?)";
+        final String sql = "INSERT INTO car_rental_sh.users(username, password, role, first_name, last_name, phone_number) VALUES(?,?,?,?,?,?)";
         try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pstmt.setString(1, user.getName());
             pstmt.setString(2, user.getPassword());
             pstmt.setString(3, user.getRole().toString());
             pstmt.setString(4, user.getFirstName());
             pstmt.setString(5, user.getLastName());
+            pstmt.setString(6, user.getPhoneNumber());
 
             pstmt.executeUpdate();
 
@@ -48,7 +49,8 @@ public class UserRepository {
                         resultSet.getString("password"),
                         Role.valueOf(resultSet.getString("role")),
                         resultSet.getString("first_name"),
-                        resultSet.getString("last_name")
+                        resultSet.getString("last_name"),
+                        resultSet.getString("phone_number")
 
                 );
             }

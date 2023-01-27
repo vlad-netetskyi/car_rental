@@ -4,11 +4,12 @@
     </head>
     <body>
     <form action = "/signup" method = "POST">
-       login: <input type = "text" name = "login"><br/>
-       first name: <input type = "text" name = "firstName"><br/>
-       last name: <input type = "text" name = "lastName"><br/>
-       password: <input type = "password" name = "password"><br/>
-       <input type = "submit" value = "sign up"/>
+       логін: <input type = "text" name = "login"><br/>
+       ім`я: <input type = "text" name = "firstName"><br/>
+       прізвище: <input type = "text" name = "lastName"><br/>
+       номер телефону: <input type = "tel" name = "phoneNumber"><br/>
+       пароль: <input type = "password" name = "password"><br/>
+       <input type = "submit" value = "зареєструватись"/>
     </form>
     </body>
 </body>

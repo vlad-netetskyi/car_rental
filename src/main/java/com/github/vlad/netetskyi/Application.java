@@ -25,6 +25,8 @@ public class Application {
         tomcat.getConnector();
 
         StandardContext ctx = (StandardContext) tomcat.addWebapp("/", new File(webappDirLocation).getAbsolutePath());
+        ctx.setRequestCharacterEncoding("UTF-8");
+        ctx.setResponseCharacterEncoding("UTF-8");
         System.out.println("configuring app with basedir: " + new File("./" + webappDirLocation).getAbsolutePath());
 
         // Declare an alternative location for your "WEB-INF/classes" dir

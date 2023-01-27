@@ -5,7 +5,8 @@ CREATE TABLE IF NOT EXISTS car_rental_sh.users (
     password VARCHAR(128) NOT NULL,
     role VARCHAR(20) NOT NULL,
     first_name VARCHAR(50),
-    last_name VARCHAR(50)
+    last_name VARCHAR(50),
+    phone_number VARCHAR(50)
 );
 CREATE TABLE IF NOT EXISTS car_rental_sh.vehicles (
     vehicle_id serial PRIMARY KEY,

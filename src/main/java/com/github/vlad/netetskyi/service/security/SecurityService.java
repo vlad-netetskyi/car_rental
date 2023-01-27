@@ -16,7 +16,7 @@ public class SecurityService {
         if (instance == null) {
             instance = new SecurityService();
             try {
-                instance.addUser("admin", "admin", Role.ADMIN, "admin", "admin");
+                instance.addUser("admin", "admin", Role.ADMIN, "admin", "admin", "");
             } catch (Throwable t) {
                 // NOP
             }
@@ -29,8 +29,8 @@ public class SecurityService {
         this.userRepository = new UserRepository();
     }
 
-    public void addUser(String userName, String password, Role role, String firstName, String lastName) {
-        final User newUser = new User(null, userName, hash(password), role, firstName, lastName);
+    public void addUser(String userName, String password, Role role, String firstName, String lastName, String phoneNumber) {
+        final User newUser = new User(null, userName, hash(password), role, firstName, lastName, phoneNumber);
         userRepository.save(newUser);
     }
 

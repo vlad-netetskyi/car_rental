@@ -34,8 +34,9 @@ public class SignupServlet extends HttpServlet {
         final String password = req.getParameter("password");
         final String firstName = req.getParameter("firstName");
         final String lastName = req.getParameter("lastName");
+        final String phoneNumber = req.getParameter("phoneNumber");
 
-        securityService.addUser(login, password, Role.USER, firstName, lastName);
+        securityService.addUser(login, password, Role.USER, firstName, lastName, phoneNumber);
 
         resp.sendRedirect(req.getContextPath() + "/login");
     }
