@@ -1,7 +1,9 @@
 package com.github.vlad.netetskyi.web;
 
 import com.github.vlad.netetskyi.entity.Booking;
+import com.github.vlad.netetskyi.entity.Vehicle;
 import com.github.vlad.netetskyi.repository.BookingRepository;
+import com.github.vlad.netetskyi.repository.VehicleRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import static com.github.vlad.netetskyi.web.ViewCarsServlet.parse;
 
@@ -18,9 +21,11 @@ import static com.github.vlad.netetskyi.web.ViewCarsServlet.parse;
 public class BookCarServlet extends HttpServlet {
 
     private final BookingRepository bookingRepository;
+    private final VehicleRepository vehicleRepository;
 
     public BookCarServlet() {
         this.bookingRepository = BookingRepository.getInstance();
+        this.vehicleRepository = VehicleRepository.getInstance();
     }
 
     @Override
@@ -32,8 +37,12 @@ public class BookCarServlet extends HttpServlet {
         Instant fromDate = parse(req.getParameter("fromDate")).truncatedTo(ChronoUnit.DAYS);
         Instant toDate = parse(req.getParameter("toDate")).truncatedTo(ChronoUnit.DAYS).plus(1, ChronoUnit.DAYS).minus(1, ChronoUnit.MINUTES);
 
+        Vehicle vehicle = vehicleRepository.getByIds(List.of(vehicleId)).get(0);
+        long rentDuration = ChronoUnit.DAYS.between(fromDate, toDate);
+        double totalPrice = vehicle.getPrice() * rentDuration;
+
         // create pending order
-        Booking booking = new Booking(null, userId, vehicleId, Instant.now(), fromDate, toDate, 100.0, Booking.PENDING, Instant.now());
+        Booking booking = new Booking(null, userId, vehicleId, Instant.now(), fromDate, toDate, totalPrice, Booking.PENDING, Instant.now());
         System.out.println("Adding new pending order:\n " + booking);
         bookingRepository.save(booking);
         // forward to thank you page with order id
