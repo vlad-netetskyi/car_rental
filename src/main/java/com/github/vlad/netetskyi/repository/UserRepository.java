@@ -80,7 +80,7 @@ public class UserRepository {
                 pstmt.setLong(index++, id);
             }
             ResultSet resultSet = pstmt.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 users.add(map(resultSet));
             }
 

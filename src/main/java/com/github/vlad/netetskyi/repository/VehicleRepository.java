@@ -80,7 +80,7 @@ public class VehicleRepository {
             }
 
             ResultSet resultSet = pstmt.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 vehicles.add(map(resultSet));
             }
 
@@ -107,7 +107,7 @@ public class VehicleRepository {
                 pstmt.setLong(index++, id);
             }
             ResultSet resultSet = pstmt.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 vehicles.add(map(resultSet));
             }
 
