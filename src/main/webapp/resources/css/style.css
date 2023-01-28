@@ -1,0 +1,36 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container-fluid {
+    padding: 3% 15% 7%;
+}
+
+.navbar {
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 1rem;
+    color: white;
+}
+
+.navbar a:hover{
+    color: green;
+}
+
+.navbar-brand {
+    font-family: "Ubuntu";
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    padding-left: 1rem;
+}
+
+.nav-item {
+    padding: 0 1rem;
+}
+
+.nav-link {
+    font-size: 1.2rem;
+    font-weight: 100;
+    color: white;
+}

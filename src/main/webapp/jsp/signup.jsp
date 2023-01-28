@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <html>
-    <head>
-    </head>
+    <jsp:include page="parts/head.jsp"/>
     <body>
+    <jsp:include page="parts/navbar.jsp"/>
     <form action = "/signup" method = "POST">
        логін: <input type = "text" name = "login"><br/>
        ім`я: <input type = "text" name = "firstName"><br/>

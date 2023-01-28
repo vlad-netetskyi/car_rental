@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <html>
+    <jsp:include page="parts/head.jsp"/>
     <body>
+    <jsp:include page="parts/navbar.jsp"/>
     <a href = "/signup">Sing Up</a>
     <form action = "/login" method = "POST">
         <div class="container">

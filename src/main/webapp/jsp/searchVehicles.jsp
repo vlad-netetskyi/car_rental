@@ -4,8 +4,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <html>
+    <jsp:include page="parts/head.jsp"/>
     <body>
-        <jsp:include page="parts/header.jsp"/>
+        <jsp:include page="parts/navbar.jsp"/>
             <form action = "/search" method = "POST">
                 <div class="container">
                     <label for="fromDate">з</label>

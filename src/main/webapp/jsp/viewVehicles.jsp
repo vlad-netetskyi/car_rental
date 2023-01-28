@@ -7,8 +7,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <html>
+    <jsp:include page="parts/head.jsp"/>
     <body>
-        <jsp:include page="parts/header.jsp"/>
+        <jsp:include page="parts/navbar.jsp"/>
         <table>
             <%
             List vehicles = (List) request.getAttribute("vehicles");

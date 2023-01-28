@@ -1,5 +1,7 @@
 <html>
+    <jsp:include page="parts/head.jsp"/>
     <body>
+        <jsp:include page="parts/navbar.jsp"/>
         <form action = "/addCar" method = "POST" enctype="multipart/form-data">
            brand: <input type = "text" name = "brand"/><br/>
            model: <input type = "text" name = "model"/><br/>
