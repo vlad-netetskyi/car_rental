@@ -64,15 +64,19 @@ public class VehicleRepository {
         return vehicles;
     }
 
-    public List<Vehicle> getAllWithFilters(List<Long> idsToExclude) {
+    public List<Vehicle> getAllWithFilters(List<Long> idsToExclude, String city) {
         String sql = "SELECT * FROM car_rental_sh.vehicles";
 
+        String where = " WHERE ";
         if (idsToExclude != null && !idsToExclude.isEmpty()) {
-            sql += String.format(" WHERE vehicle_id NOT IN (%s)",
+            sql += String.format(" WHERE vehicle_id NOT IN (%s) ",
                     idsToExclude.stream()
                             .map(v -> "?")
                             .collect(Collectors.joining(", ")));
+            where = " AND ";
         }
+
+        sql += where + " city = ?";
 
         final List<Vehicle> vehicles = new ArrayList<>();
         try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -83,6 +87,7 @@ public class VehicleRepository {
                     pstmt.setLong(index++, id);
                 }
             }
+            pstmt.setString(index++, city);
 
             ResultSet resultSet = pstmt.executeQuery();
             while (resultSet.next()) {

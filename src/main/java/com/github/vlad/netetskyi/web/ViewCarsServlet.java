@@ -43,6 +43,7 @@ public class ViewCarsServlet extends HttpServlet {
         System.out.println("/cars POST");
         LocalDate fromDate = parse(req.getParameter("fromDate"));
         LocalDate toDate = parse(req.getParameter("toDate"));
+        String city = req.getParameter("city");
         System.out.println("FromDate = " + fromDate + ", ToDate = " + toDate);
 
         List<Booking> bookings = bookingRepository.getAll();
@@ -52,7 +53,7 @@ public class ViewCarsServlet extends HttpServlet {
                 .map(Booking::getVehicleId).toList();
 
 
-        List<Vehicle> all = vehicleRepository.getAllWithFilters(bookedVehicleIds);
+        List<Vehicle> all = vehicleRepository.getAllWithFilters(bookedVehicleIds, city);
         req.setAttribute("vehicles", all);
         req.setAttribute("fromDate", req.getParameter("fromDate"));
         req.setAttribute("toDate", req.getParameter("toDate"));
