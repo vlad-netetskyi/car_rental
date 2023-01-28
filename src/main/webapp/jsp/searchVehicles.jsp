@@ -6,7 +6,7 @@
 <html>
     <body>
         <jsp:include page="parts/header.jsp"/>
-            <form action = "/" method = "POST">
+            <form action = "/search" method = "POST">
                 <div class="container">
                     <label for="fromDate">з</label>
                     <input type="date" name = "fromDate" value = "<%=request.getAttribute("defaultFromDate")%>" required>

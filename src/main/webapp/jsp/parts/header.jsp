@@ -4,7 +4,8 @@
 <% User user = (User) request.getSession().getAttribute("user"); %>
 
 <header>
-<a href="/">Парк авто </a>
+<a href="/">Головна </a>
+<a href="/search">Парк авто </a>
 <%if(user != null) {%>
     <a href="/bookings">Бронювання</a>
 <% } %>
