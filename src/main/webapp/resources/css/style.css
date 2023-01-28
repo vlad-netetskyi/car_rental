@@ -48,3 +48,34 @@ h3 {
     text-align: center;
     margin-bottom: 3rem;
 }
+
+.car-name {
+    text-align: center;
+    font-weight: bold;
+}
+
+.card {
+    padding: 0.5rem;
+}
+
+.textbox {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.border-bottom {
+    border-bottom: 1px solid grey;
+}
+
+.price-container {
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.price-container p {
+    color: green;
+}
+
+.price-container a {
+    color: grey;
+}
