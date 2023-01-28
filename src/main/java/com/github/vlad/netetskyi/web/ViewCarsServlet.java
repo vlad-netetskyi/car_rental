@@ -41,8 +41,8 @@ public class ViewCarsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("/cars POST");
-        Instant fromDate = parse(req.getParameter("fromDate"));
-        Instant toDate = parse(req.getParameter("toDate"));
+        LocalDate fromDate = parse(req.getParameter("fromDate"));
+        LocalDate toDate = parse(req.getParameter("toDate"));
         System.out.println("FromDate = " + fromDate + ", ToDate = " + toDate);
 
         List<Booking> bookings = bookingRepository.getAll();
@@ -59,12 +59,11 @@ public class ViewCarsServlet extends HttpServlet {
         req.getRequestDispatcher("/jsp/viewVehicles.jsp").forward(req, resp);
     }
 
-    private static boolean isWithin(Instant instant, Instant from, Instant to) {
-        return instant.isAfter(from) && instant.isBefore(to);
+    private static boolean isWithin(LocalDate date, LocalDate from, LocalDate to) {
+        return date.compareTo(from) >= 0 && date.compareTo(to) <= 0;
     }
 
-    public static Instant parse(String dateStr) {
-        LocalDate date = LocalDate.parse(dateStr);
-        return date.atStartOfDay(ZoneId.of("Europe/Paris")).toInstant();
+    public static LocalDate parse(String dateStr) {
+        return LocalDate.parse(dateStr);
     }
 }

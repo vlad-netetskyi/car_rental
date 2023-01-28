@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -34,8 +35,8 @@ public class BookCarServlet extends HttpServlet {
         // extract ids
         long userId = Long.parseLong(req.getParameter("userId"));
         long vehicleId = Long.parseLong(req.getParameter("vehicleId"));
-        Instant fromDate = parse(req.getParameter("fromDate")).truncatedTo(ChronoUnit.DAYS);
-        Instant toDate = parse(req.getParameter("toDate")).truncatedTo(ChronoUnit.DAYS).plus(1, ChronoUnit.DAYS).minus(1, ChronoUnit.MINUTES);
+        LocalDate fromDate = parse(req.getParameter("fromDate"));
+        LocalDate toDate = parse(req.getParameter("toDate"));
 
         Vehicle vehicle = vehicleRepository.getByIds(List.of(vehicleId)).get(0);
         long rentDuration = ChronoUnit.DAYS.between(fromDate, toDate);

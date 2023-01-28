@@ -1,6 +1,7 @@
 package com.github.vlad.netetskyi.entity;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -10,8 +11,8 @@ public class Booking {
     private final long userId;
     private final long vehicleId;
     private final Instant createdAt;
-    private final Instant rentStartDate;
-    private final Instant rentFinishDate;
+    private final LocalDate rentStartDate;
+    private final LocalDate rentFinishDate;
     private final double rentTotalPrice;
     private final String status;
     private final Instant statusChangedAt;
@@ -26,7 +27,7 @@ public class Booking {
     public static final String ACCEPTED = "Підтверджено";
     public static final String REJECTED = "Відхилено";
 
-    public Booking(Long id, long userId, long vehicleId, Instant createdAt, Instant rentStartDate, Instant rentFinishDate, double rentTotalPrice, String status, Instant statusChangedAt) {
+    public Booking(Long id, long userId, long vehicleId, Instant createdAt, LocalDate rentStartDate, LocalDate rentFinishDate, double rentTotalPrice, String status, Instant statusChangedAt) {
         this.id = id;
         this.userId = userId;
         this.vehicleId = vehicleId;
@@ -54,11 +55,11 @@ public class Booking {
         return createdAt;
     }
 
-    public Instant getRentStartDate() {
+    public LocalDate getRentStartDate() {
         return rentStartDate;
     }
 
-    public Instant getRentFinishDate() {
+    public LocalDate getRentFinishDate() {
         return rentFinishDate;
     }
 
@@ -80,7 +81,8 @@ public class Booking {
 
     public String getRentDurationStr() {
         final String pattern = "dd.MM.yyyy";
-        return friendlyDate(rentStartDate, pattern) + " - " + friendlyDate(rentFinishDate, pattern);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        return rentStartDate.format(formatter) + " - " + rentFinishDate.format(formatter);
     }
 
     public String getVehicleBrand() {
