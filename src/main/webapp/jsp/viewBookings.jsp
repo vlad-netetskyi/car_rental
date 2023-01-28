@@ -14,23 +14,27 @@
                 List bookings = (List) request.getAttribute("bookings");
 
                 if (bookings != null && !bookings.isEmpty()) { %>
-                    <table>
-                        <th>Номер бронювання</th>
-                        <th>Час бронювання</th>
-                        <th>Авто</th>
-                        <th>Час оренди</th>
-                        <th>Ціна</th>
-                        <th>Статус</th>
-                        <% if(user.isAdmin()) { %>
-                            <th>Замовник</th>
-                            <th>Телефон</th>
-                            <th>Управління бронюванням</th>
-                        <% } %>
+                <div class="container-fluid">
+                    <h3>Бронювання</h3>
+                    <table class="table">
+                        <tr>
+                            <th scope="col">Номер бронювання</th>
+                            <th scope="col">Час бронювання</th>
+                            <th scope="col">Авто</th>
+                            <th scope="col">Час оренди</th>
+                            <th scope="col">Ціна</th>
+                            <th scope="col">Статус</th>
+                            <% if(user.isAdmin()) { %>
+                                <th>Замовник</th>
+                                <th>Телефон</th>
+                                <th>Управління бронюванням</th>
+                            <% } %>
+                        </tr>
 
                         <%for(int i=0; i<bookings.size();i++){
                             Booking booking = (Booking) bookings.get(i);%>
                             <tr>
-                                <td><%= booking.getId() %></td>
+                                <td scope="row"><%= booking.getId() %></td>
                                 <td><%= booking.getCreatedAtStr() %></td>
                                 <td><%= booking.getVehicleBrand()%> <%= booking.getVehicleModel()%></td>
                                 <td><%= booking.getRentDurationStr() %></td>
@@ -51,6 +55,7 @@
                             </tr>
                         <%}%>
                     </table>
+                </div>
                 <%}else{%>
                     <div><p>У Вас поки немає бронювань</p></div>
                <%}%>
