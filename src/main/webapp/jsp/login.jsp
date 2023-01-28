@@ -3,19 +3,23 @@
     <jsp:include page="parts/head.jsp"/>
     <body>
     <jsp:include page="parts/navbar.jsp"/>
-    <a href = "/signup">Sing Up</a>
     <form action = "/login" method = "POST">
-        <div class="container">
-            <label for="login">username</label>
-            <input type = "text" name = "login" placeholder = "enter your username" required>
+        <div class="mb-3">
+            <label for="loginInput" class="form-label">Логін</label>
+            <input type="text" class="form-control" id="loginInput" name="login" required>
+        </div>
+        <div class="mb-3">
+            <label for="passwordInput" class="form-label">Пароль</label>
+            <input type="password" class="form-control" id="passwordInput" name="password" required>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Запам'ятати мене</label>
+        </div>
 
-            <label for="password">password</label>
-            <input type = "password" name = "password" placeholder = "enter your password" required>
-            <p> ${errorMessage} </p>
-            <button type = "submit" value = "login"/>
-            <label>
-              <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
+        <div>
+            <button type="submit" class="btn btn-primary">Увійти</button>
+            <span>Ще не зареєстровані? <a href = "/signup">Зареєструватись</a></span>
         </div>
     </form>
     </body>
