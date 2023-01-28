@@ -30,6 +30,11 @@ public class SecurityFilter implements Filter {
             return;
         }
 
+        if (!((User) user).isAdmin()) {
+            response.sendRedirect(request.getContextPath() + "/");
+            return;
+        }
+
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }
