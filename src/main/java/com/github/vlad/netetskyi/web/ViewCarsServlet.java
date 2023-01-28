@@ -33,8 +33,8 @@ public class ViewCarsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("/cars GET");
         final String pattern = "YYYY-MM-DD";
-        req.setAttribute("defaultFromDate", Booking.friendlyDate(Instant.now(), pattern));
-        req.setAttribute("defaultToDate", Booking.friendlyDate(Instant.now().plus(1, ChronoUnit.DAYS), pattern));
+        req.setAttribute("fromDate", Booking.friendlyDate(Instant.now(), pattern));
+        req.setAttribute("toDate", Booking.friendlyDate(Instant.now().plus(1, ChronoUnit.DAYS), pattern));
         req.getRequestDispatcher("/jsp/searchVehicles.jsp").forward(req, resp);
     }
 
@@ -56,7 +56,7 @@ public class ViewCarsServlet extends HttpServlet {
         req.setAttribute("vehicles", all);
         req.setAttribute("fromDate", req.getParameter("fromDate"));
         req.setAttribute("toDate", req.getParameter("toDate"));
-        req.getRequestDispatcher("/jsp/viewVehicles.jsp").forward(req, resp);
+        req.getRequestDispatcher("/jsp/searchVehicles.jsp").forward(req, resp);
     }
 
     private static boolean isWithin(LocalDate date, LocalDate from, LocalDate to) {

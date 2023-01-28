@@ -3,7 +3,7 @@
     <jsp:include page="parts/head.jsp"/>
     <body>
         <jsp:include page="parts/navbar.jsp"/>
-        <form action = "/addCar" method = "POST" enctype="multipart/form-data">
+        <form action = "/addCar" method = "POST" enctype="multipart/form-data" class="full-page-form">
             <h3>Додати автомобіль</h3>
             <div class="mb-3">
                 <label for="brandInput" class="form-label">Марка</label>

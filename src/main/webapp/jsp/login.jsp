@@ -3,7 +3,7 @@
     <jsp:include page="parts/head.jsp"/>
     <body>
     <jsp:include page="parts/navbar.jsp"/>
-    <form action = "/login" method = "POST">
+    <form action = "/login" method = "POST" class="full-page-form">
         <div class="mb-3">
             <label for="loginInput" class="form-label">Логін</label>
             <input type="text" class="form-control" id="loginInput" name="login" required>

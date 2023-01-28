@@ -35,7 +35,7 @@ body {
     color: white;
 }
 
-form {
+.full-page-form {
   min-width: 500px;
   position: absolute;
   text-align: left;
