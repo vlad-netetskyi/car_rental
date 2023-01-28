@@ -15,6 +15,11 @@ CREATE TABLE IF NOT EXISTS car_rental_sh.vehicles (
     type VARCHAR(20) NOT NULL,
     production_year INT NOT NULL,
     price NUMERIC NOT NULL,
+    fuel VARCHAR(20) NOT NULL,
+    engine_capacity NUMERIC NOT NULL,
+    transmission VARCHAR(20) NOT NULL,
+    seats NUMERIC NOT NULL,
+    city VARCHAR(20) NOT NULL,
     img BYTEA NOT NULL
 );
 CREATE TABLE IF NOT EXISTS car_rental_sh.orders (

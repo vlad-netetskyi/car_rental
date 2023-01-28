@@ -4,6 +4,7 @@ import org.apache.tomcat.util.codec.binary.Base64;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Vehicle {
@@ -13,16 +14,26 @@ public class Vehicle {
     private final String type;
     private final int year;
     private final double price;
+    private final String transmission;
+    private final String fuel;
+    private final double engineCapacity;
+    private final int seats;
+    private final String city;
     private final byte[] img;
 
-    public Vehicle(Long id, String brand, String model, String type, int year, double price, byte[] img) {
+    public Vehicle(Long id, String brand, String model, String type, int year, double price, String transmission, String fuel, double engineCapacity, int seats, String city, byte[] img) {
         this.id = id;
         this.brand = brand;
         this.model = model;
         this.type = type;
         this.year = year;
         this.price = price;
+        this.transmission = transmission;
+        this.fuel = fuel;
+        this.engineCapacity = engineCapacity;
+        this.seats = seats;
         this.img = img;
+        this.city = city;
     }
 
     public Long getId() {
@@ -53,6 +64,26 @@ public class Vehicle {
         return img;
     }
 
+    public double getEngineCapacity() {
+        return engineCapacity;
+    }
+
+    public String getFuel() {
+        return fuel;
+    }
+
+    public String getTransmission() {
+        return transmission;
+    }
+
+    public int getSeats() {
+        return seats;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
     public String getBase64ImgFile() throws UnsupportedEncodingException {
         // TODO: find better place for it
         byte[] encodeBase64 = Base64.encodeBase64(img, false);
@@ -81,6 +112,11 @@ public class Vehicle {
                 ", type='" + type + '\'' +
                 ", year=" + year +
                 ", price=" + price +
+                ", transmission='" + transmission + '\'' +
+                ", fuel='" + fuel + '\'' +
+                ", engineCapacity=" + engineCapacity +
+                ", seats=" + seats +
+                ", img=" + Arrays.toString(img) +
                 '}';
     }
 }

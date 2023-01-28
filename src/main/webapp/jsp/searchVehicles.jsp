@@ -45,20 +45,28 @@
                                     <div class="car-name"><%= vehicle.getBrand()%> <%= vehicle.getModel()%></div>
                                     <p><img alt="img" class= "img-fluid" src="data:image/jpeg;base64,<%= vehicle.getBase64ImgFile() %>"/></p>
                                     <div class="textbox border-bottom">
+                                        <p class="float-start">Рік</p>
+                                        <p class="float-end"><%= vehicle.getYear()%></p>
+                                    </div>
+                                    <div class="textbox border-bottom">
                                         <p class="float-start">Тип кузова</p>
                                         <p class="float-end"><%= vehicle.getType()%></p>
                                     </div>
+                                     <div class="textbox border-bottom">
+                                        <p class="float-start">Тип палива</p>
+                                        <p class="float-end"><%= vehicle.getFuel()%></p>
+                                    </div>
                                     <div class="textbox border-bottom">
                                         <p class="float-start">Об'єм двигуна</p>
-                                        <p class="float-end">3,0</p>
+                                        <p class="float-end"><%= vehicle.getEngineCapacity()%></p>
                                     </div>
                                     <div class="textbox border-bottom">
                                         <p class="float-start">Тип трансмісії</p>
-                                        <p class="float-end">Автомат</p>
+                                        <p class="float-end"><%= vehicle.getTransmission()%></p>
                                     </div>
                                     <div class="textbox border-bottom">
-                                        <p class="float-start">Тип палива</p>
-                                        <p class="float-end">Бензин</p>
+                                        <p class="float-start">Кількість місць</p>
+                                        <p class="float-end"><%= vehicle.getSeats()%></p>
                                     </div>
                                     <div class="textbox price-container">
                                         <p class="float-start"><%= vehicle.getPrice()%> грн/доба</p>

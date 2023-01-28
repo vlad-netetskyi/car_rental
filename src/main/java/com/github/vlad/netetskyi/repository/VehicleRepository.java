@@ -26,14 +26,19 @@ public class VehicleRepository {
     }
 
     public void add(Vehicle vehicle) {
-        final String sql = "INSERT INTO car_rental_sh.vehicles(brand, model, type, production_year, price, img) VALUES(?,?,?,?,?,?)";
+        final String sql = "INSERT INTO car_rental_sh.vehicles(brand, model, type, production_year, price, transmission, fuel, engine_capacity, seats, city, img) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
         try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pstmt.setString(1, vehicle.getBrand());
             pstmt.setString(2, vehicle.getModel());
             pstmt.setString(3, vehicle.getType());
             pstmt.setInt(4, vehicle.getYear());
             pstmt.setDouble(5, vehicle.getPrice());
-            pstmt.setBytes(6, vehicle.getImg());
+            pstmt.setString(6, vehicle.getTransmission());
+            pstmt.setString(7, vehicle.getFuel());
+            pstmt.setDouble(8, vehicle.getEngineCapacity());
+            pstmt.setInt(9, vehicle.getSeats());
+            pstmt.setString(10, vehicle.getCity());
+            pstmt.setBytes(11, vehicle.getImg());
 
             pstmt.executeUpdate();
 
@@ -126,6 +131,11 @@ public class VehicleRepository {
                 resultSet.getString("type"),
                 resultSet.getInt("production_year"),
                 resultSet.getDouble("price"),
+                resultSet.getString("transmission"),
+                resultSet.getString("fuel"),
+                resultSet.getDouble("engine_capacity"),
+                resultSet.getInt("seats"),
+                resultSet.getString("city"),
                 resultSet.getBytes("img"));
     }
 }
