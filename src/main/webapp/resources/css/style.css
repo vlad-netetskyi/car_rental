@@ -1,0 +1,192 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container-fluid {
+    padding: 3% 15% 7%;
+}
+
+.navbar {
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 1rem;
+    color: white;
+}
+
+.navbar a:hover{
+    color: green;
+}
+
+.navbar-brand {
+    font-family: "Ubuntu";
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    padding-left: 1rem;
+}
+
+.nav-item {
+    padding: 0 1rem;
+}
+
+.nav-link {
+    font-size: 1.2rem;
+    font-weight: 100;
+    color: white;
+}
+
+.full-page-form {
+  min-width: 500px;
+  position: absolute;
+  text-align: left;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+h3 {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.car-name {
+    text-align: center;
+    font-weight: bold;
+}
+
+.card {
+    padding: 0.5rem;
+}
+
+.textbox {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.border-bottom {
+    border-bottom: 1px solid grey;
+}
+
+.price-container {
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.price-container p {
+    color: green;
+}
+
+.price-container a {
+    color: grey;
+}
+.auto
+ -items {
+  margin: 90px 0 50px 0;
+
+ }
+  .auto
+ -items .go
+ -all {
+  color: #1F2326;
+  font
+ -weight: 600;
+  font
+ -size: 38px;
+  line
+ -height: 51px;
+  position: relative;
+  height: 100%;
+  background: #fff;
+  box
+ -shadow: 0px 3px 6px rgba(75, 81, 91, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.15);
+  border
+ -radius: 10px;
+
+ }
+  .auto
+ -items .go
+ -all .text {
+  padding: 25px 35px;
+
+ }
+  .auto
+ -items .go
+ -all a {
+  width: 100%;
+  text
+ -decoration: none;
+  display: block;
+  padding: 15px 0;
+  position: absolute;
+  bottom: 0;
+  background: #137B4F;
+  box
+ -shadow: 0px 3px 6px rgba(75, 81, 91, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.15);
+  border
+ -radius: 10px;
+  text
+ -align: center;
+  font
+ -weight: bold;
+  font
+ -size: 24px;
+  color: #fff;
+  text
+ -transform: uppercase;
+
+ }
+  .help
+ -item {
+  text
+ -align: center;
+  padding: 0 50px;
+  color: #fff;
+
+ }
+  .help
+ -item .title {
+  color: #fff;
+  font
+ -weight: normal;
+  font
+ -size: 20px;
+  line
+ -height: 23px;
+  margin
+ -bottom: 20px;
+  padding: 30px 0 0 0;
+
+ }
+  .help
+ -item .description {
+  color: #fff;
+  font
+ -weight: 300;
+  font-size: 13px;
+  line-height: 20px;
+  }
+  .block-title {
+  text-align: center;
+  font-size: 31px;
+  line-height: 37px;
+  color: #fff;
+  font-weight: normal;
+  padding: 60px 0;
+  }
+  .block-title .sub-title {
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 20px;
+  text-align: center;
+  margin-top: 13px;
+  }
+  .header-bg {
+  height: 600px;
+  background: url('/img/home_bg.png') no-repeat;
+  background-size: cover;
+  }
+.img-line {
+		padding: 15px;
+		margin-right: 10px;
+		margin-bottom: 10px;
+    }
