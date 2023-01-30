@@ -8,9 +8,9 @@
 
 <html>
     <jsp:include page="parts/head.jsp"/>
-    <body>
+    <body >
         <jsp:include page="parts/navbar.jsp"/>
-        <div class="container-fluid">
+        <div class="container-fluid" >
             <h3>Автомобілі</h3>
             <form action = "/search" method = "POST" class="row justify-content-md-center">
                 <div class="col-auto">
